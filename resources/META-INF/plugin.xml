@@ -33,10 +33,10 @@
   </extensions>
 
   <actions>
-    <action id="mvp_create" class="com.acky.rio.plugin.mvp.action.MVPCreateAction"
-        text="MVP Classes"
-        description="Create MVP Classes" icon="/icons/icon_tf.png">
-      <add-to-group group-id="NewGroup" anchor="after" relative-to-action="NewClass"/>
+    <action class="com.acky.rio.plugin.mvp.action.MVPCreateAction" description="Create MVP Classes"
+        icon="/icons/icon_tf.png"
+        id="mvp_create" text="MVP Classes">
+      <add-to-group anchor="after" group-id="NewGroup" relative-to-action="NewClass"/>
     </action>
   </actions>
 
