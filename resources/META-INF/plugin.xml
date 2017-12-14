@@ -1,0 +1,47 @@
+<idea-plugin>
+  <id>com.yinhu.app.plugin.mvp_create</id>
+  <name>MVPClasses</name>
+  <version>1.1</version>
+  <vendor email="" url="http://www.yinhu.com">YinHu.Jiang</vendor>
+
+  <description><![CDATA[
+      <em>Create MVP Classes Plugin</em> <br>
+      <br>
+      1 package and 3 files will be created: <br>
+      1、Contract <br>
+      2、Presenter <br>
+      3、Activity or Fragment
+    ]]>
+  </description>
+
+  <change-notes><![CDATA[
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="145.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+    <internalFileTemplate name="ackyTemplates"/>
+  </extensions>
+
+  <actions>
+    <action id="mvp_create" class="com.acky.rio.plugin.mvp.action.MVPCreateAction"
+        text="MVP Classes"
+        description="Create MVP Classes" icon="/icons/icon_tf.png">
+      <add-to-group group-id="NewGroup" anchor="after" relative-to-action="NewClass"/>
+    </action>
+  </actions>
+
+  <application-components>
+  </application-components>
+  <module-components>
+  </module-components>
+</idea-plugin>

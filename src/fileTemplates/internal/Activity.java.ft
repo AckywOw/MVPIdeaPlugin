@@ -1,0 +1,17 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")
+package ${PACKAGE_NAME};
+#end
+/**
+ * // TODO: 2017/12/13
+ *
+ * Author: ${USER}
+ * Created on ${DATE}
+ */
+public class ${NAME}Activity extends ${NAME}Contract.View<${NAME}Presenter, Entity> {
+
+  @NonNull
+  @Override
+  protected ${NAME}Presenter getPresenter() {
+    return new ${NAME}Presenter();
+  }
+}

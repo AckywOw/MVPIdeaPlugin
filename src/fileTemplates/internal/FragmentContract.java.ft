@@ -1,0 +1,18 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")
+package ${PACKAGE_NAME};
+#end
+/**
+ * // TODO: 2017/12/13
+ *
+ * Author: ${USER}
+ * Created on ${DATE}
+ */
+public interface ${NAME}Contract  {
+  abstract class View<P extends Presenter, Entity> extends BaseMVPFragment<P> {
+
+  }
+
+  abstract class Presenter extends CommonPresenter<View> {
+
+  }
+}
