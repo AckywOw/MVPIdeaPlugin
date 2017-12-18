@@ -2,6 +2,8 @@
 package ${PACKAGE_NAME};
 #end
 /**
+ * // TODO:
+ *
  * Author: ${USER}
  * Created on ${DATE}
  */

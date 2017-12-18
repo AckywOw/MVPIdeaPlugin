@@ -1,0 +1,19 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")
+package
+
+  ${PACKAGE_NAME};
+#end
+/**
+ * // TODO:
+ *
+ * Author: ${USER}
+ * Created on ${DATE}
+ */
+public class ${NAME}Fragment extends ${NAME}Contract.View<${NAME}Contract.Presenter> {
+
+  @NonNull
+  @Override
+  protected ${NAME}Contract.Presenter getPresenter() {
+    return new ${NAME}Presenter();
+  }
+}

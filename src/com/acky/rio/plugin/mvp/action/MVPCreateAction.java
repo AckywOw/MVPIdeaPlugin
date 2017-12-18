@@ -35,8 +35,8 @@ public class MVPCreateAction extends AnAction {
   private void showDialog(AnActionEvent e) {
     MVPCreateDialog myDialog = new MVPCreateDialog(e, new MVPCreateDialog.DialogCallBack() {
       @Override
-      public void ok(AnActionEvent e, String className, boolean isActivity) {
-        new CreateFile(e, className, isActivity).execute();
+      public void ok(AnActionEvent e, String className, boolean isActivity, boolean hasEntity) {
+        new CreateFile(e, className, isActivity, hasEntity).execute();
       }
     });
     myDialog.setVisible(true);
@@ -45,7 +45,7 @@ public class MVPCreateAction extends AnAction {
   @Override
   public void update(AnActionEvent e) {
     IdeView ideView = e.getRequiredData(LangDataKeys.IDE_VIEW);
-    if (ideView.getDirectories().length == 1) {
+    if (ideView != null && ideView.getOrChooseDirectory() != null) {
       PsiDirectory directory = ideView.getOrChooseDirectory();
       if (directory.getVirtualFile().getPath().contains("src/main/java")) {
         e.getPresentation().setEnabledAndVisible(true);
@@ -62,17 +62,19 @@ public class MVPCreateAction extends AnAction {
     private final String packageName;
     private final String className;
     private final boolean isActivity;
+    private final boolean hasEntity;
     private final PsiElementFactory factory;
     private final JavaDirectoryService directoryService;
     private final PsiDirectory directory;
     private final GlobalSearchScope searchScope;
     private final PsiShortNamesCache psiShortNamesCache;
 
-    public CreateFile(AnActionEvent e, String className, boolean isActivity) {
+    public CreateFile(AnActionEvent e, String className, boolean isActivity, boolean hasEntity) {
       super(e.getProject());
       this.packageName = className.toLowerCase();
       this.className = className;
       this.isActivity = isActivity;
+      this.hasEntity = hasEntity;
       this.project = e.getProject();
       factory = JavaPsiFacade.getElementFactory(project);
       directoryService = JavaDirectoryService.getInstance();
@@ -116,23 +118,46 @@ public class MVPCreateAction extends AnAction {
        * 创建文件
        */
       if (isActivity) {
-        PsiClass contract = directoryService.createClass(pDirectory, className, "ActivityContract");
-        PsiClass activity = directoryService.createClass(pDirectory, className, "Activity");
+        PsiClass contract;
+        PsiClass activity;
+        PsiClass presenter;
+        if (hasEntity) {
+          contract = directoryService.createClass(pDirectory, className, "ActivityContract");
+          activity = directoryService.createClass(pDirectory, className, "Activity");
+          presenter = directoryService.createClass(pDirectory, className, "ActivityPresenter");
+        } else {
+          contract =
+              directoryService.createClass(pDirectory, className, "ActivityContractNoEntity");
+          activity = directoryService.createClass(pDirectory, className, "ActivityNoEntity");
+          presenter =
+              directoryService.createClass(pDirectory, className, "ActivityPresenterNoEntity");
+        }
         ((PsiJavaFile) contract.getContainingFile()).getImportList()
                                                     .add(getPsiImportStatement("BaseMVPActivity"));
         ((PsiJavaFile) contract.getContainingFile()).getImportList().add(importCommonPresenter);
 
         ((PsiJavaFile) activity.getContainingFile()).getImportList().add(importNonNull);
       } else {
-        PsiClass contract = directoryService.createClass(pDirectory, className, "FragmentContract");
-        PsiClass faragment = directoryService.createClass(pDirectory, className, "Fragment");
+        PsiClass contract;
+        PsiClass faragment;
+        PsiClass presenter;
+        if (hasEntity) {
+          contract = directoryService.createClass(pDirectory, className, "FragmentContract");
+          faragment = directoryService.createClass(pDirectory, className, "Fragment");
+          presenter = directoryService.createClass(pDirectory, className, "FragmentPresenter");
+        } else {
+          contract =
+              directoryService.createClass(pDirectory, className, "FragmentContractNoEntity");
+          faragment = directoryService.createClass(pDirectory, className, "FragmentNoEntity");
+          presenter =
+              directoryService.createClass(pDirectory, className, "FragmentPresenterNoEntity");
+        }
         ((PsiJavaFile) contract.getContainingFile()).getImportList()
                                                     .add(getPsiImportStatement("BaseMVPFragment"));
         ((PsiJavaFile) contract.getContainingFile()).getImportList().add(importCommonPresenter);
 
         ((PsiJavaFile) faragment.getContainingFile()).getImportList().add(importNonNull);
       }
-      PsiClass presenter = directoryService.createClass(pDirectory, className, "Presenter");
     }
 
     private PsiClass getPsiClassByName(String className, String packageName) {

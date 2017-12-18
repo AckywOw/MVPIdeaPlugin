@@ -1,0 +1,14 @@
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")
+package
+
+  ${PACKAGE_NAME};
+#end
+/**
+ * // TODO:
+ *
+ * Author: ${USER}
+ * Created on ${DATE}
+ */
+public class ${NAME}Presenter extends ${NAME}Contract.Presenter {
+
+}

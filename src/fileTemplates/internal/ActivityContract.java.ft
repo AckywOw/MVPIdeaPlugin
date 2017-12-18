@@ -8,11 +8,11 @@ package ${PACKAGE_NAME};
  * Created on ${DATE}
  */
 public interface ${NAME}Contract {
-  abstract class View<P extends Presenter, Entity> extends BaseMVPActivity<P> {
+  abstract class View<P extends Presenter<Entity>, Entity> extends BaseMVPActivity<P> {
 
   }
 
-  abstract class Presenter extends CommonPresenter<View> {
+  abstract class Presenter<Entity> extends CommonPresenter<View> {
 
   }
 }

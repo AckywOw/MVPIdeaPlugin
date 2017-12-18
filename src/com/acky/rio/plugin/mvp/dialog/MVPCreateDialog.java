@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -23,6 +24,7 @@ public class MVPCreateDialog extends JDialog {
   private JTextField textField1;
   private JRadioButton activityRadioButton;
   private JRadioButton fragmentRadioButton;
+  private JCheckBox entityCheckBox;
 
   private AnActionEvent anActionEvent;
   private DialogCallBack callBack;
@@ -74,7 +76,7 @@ public class MVPCreateDialog extends JDialog {
   public static void main(String[] args) {
     MVPCreateDialog dialog = new MVPCreateDialog(null, new DialogCallBack() {
       @Override
-      public void ok(AnActionEvent e, String className, boolean isActivity) {
+      public void ok(AnActionEvent e, String className, boolean isActivity, boolean hasEntity) {
 
       }
     });
@@ -85,7 +87,8 @@ public class MVPCreateDialog extends JDialog {
 
   private void onOK() {
     if (callBack != null) {
-      callBack.ok(anActionEvent, textField1.getText().trim(), activityRadioButton.isSelected());
+      callBack.ok(anActionEvent, textField1.getText().trim(), activityRadioButton.isSelected(),
+          entityCheckBox.isSelected());
     }
     dispose();
   }
@@ -96,6 +99,6 @@ public class MVPCreateDialog extends JDialog {
   }
 
   public interface DialogCallBack {
-    void ok(AnActionEvent e, String className, boolean isActivity);
+    void ok(AnActionEvent e, String className, boolean isActivity, boolean hasEntity);
   }
 }

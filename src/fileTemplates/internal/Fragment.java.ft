@@ -2,16 +2,17 @@
 package ${PACKAGE_NAME};
 #end
 /**
- * // TODO: 2017/12/13
+ * // TODO:
  *
  * Author: ${USER}
  * Created on ${DATE}
  */
-public class ${NAME}Fragment extends ${NAME}Contract.View<${NAME}Presenter, Entity> {
+public class ${NAME}Fragment<Entity>
+    extends ${NAME}Contract.View<${NAME}Contract.Presenter<Entity>, Entity> {
 
   @NonNull
   @Override
-  protected ${NAME}Presenter getPresenter() {
+  protected ${NAME}Contract.Presenter<Entity> getPresenter() {
     return new ${NAME}Presenter();
   }
 }
