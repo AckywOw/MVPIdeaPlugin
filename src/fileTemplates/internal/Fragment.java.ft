@@ -7,7 +7,7 @@ package ${PACKAGE_NAME};
  * Author: ${USER}
  * Created on ${DATE}
  */
-public class ${NAME}Fragment<Entity>
+public class ${NAME}Fragment
     extends ${NAME}Contract.View<${NAME}Contract.Presenter<Entity>, Entity> {
 
   @NonNull
