@@ -35,8 +35,8 @@ public class MVPCreateAction extends AnAction {
   private void showDialog(AnActionEvent e) {
     MVPCreateDialog myDialog = new MVPCreateDialog(e, new MVPCreateDialog.DialogCallBack() {
       @Override
-      public void ok(AnActionEvent e, String className, boolean isActivity, boolean hasEntity) {
-        new CreateFile(e, className, isActivity, hasEntity).execute();
+      public void ok(AnActionEvent e, String className, boolean isActivity) {
+        new CreateFile(e, className, isActivity).execute();
       }
     });
     myDialog.setVisible(true);
@@ -62,19 +62,19 @@ public class MVPCreateAction extends AnAction {
     private final String packageName;
     private final String className;
     private final boolean isActivity;
-    private final boolean hasEntity;
+    //private final boolean hasEntity;
     private final PsiElementFactory factory;
     private final JavaDirectoryService directoryService;
     private final PsiDirectory directory;
     private final GlobalSearchScope searchScope;
     private final PsiShortNamesCache psiShortNamesCache;
 
-    public CreateFile(AnActionEvent e, String className, boolean isActivity, boolean hasEntity) {
+    public CreateFile(AnActionEvent e, String className, boolean isActivity) {
       super(e.getProject());
       this.packageName = className.toLowerCase();
       this.className = className;
       this.isActivity = isActivity;
-      this.hasEntity = hasEntity;
+      //this.hasEntity = hasEntity;
       this.project = e.getProject();
       factory = JavaPsiFacade.getElementFactory(project);
       directoryService = JavaDirectoryService.getInstance();
@@ -85,7 +85,7 @@ public class MVPCreateAction extends AnAction {
     }
 
     @Override
-    protected void run() throws Throwable {
+    protected void run() {
       PsiDirectory pDirectory;
 
       /**
@@ -121,17 +121,17 @@ public class MVPCreateAction extends AnAction {
         PsiClass contract;
         PsiClass activity;
         PsiClass presenter;
-        if (hasEntity) {
+        //if (hasEntity) {
           contract = directoryService.createClass(pDirectory, className, "ActivityContract");
           activity = directoryService.createClass(pDirectory, className, "Activity");
           presenter = directoryService.createClass(pDirectory, className, "ActivityPresenter");
-        } else {
-          contract =
-              directoryService.createClass(pDirectory, className, "ActivityContractNoEntity");
-          activity = directoryService.createClass(pDirectory, className, "ActivityNoEntity");
-          presenter =
-              directoryService.createClass(pDirectory, className, "ActivityPresenterNoEntity");
-        }
+        //} else {
+        //  contract =
+        //      directoryService.createClass(pDirectory, className, "ActivityContractNoEntity");
+        //  activity = directoryService.createClass(pDirectory, className, "ActivityNoEntity");
+        //  presenter =
+        //      directoryService.createClass(pDirectory, className, "ActivityPresenterNoEntity");
+        //}
         ((PsiJavaFile) contract.getContainingFile()).getImportList()
                                                     .add(getPsiImportStatement("BaseMVPActivity"));
         ((PsiJavaFile) contract.getContainingFile()).getImportList().add(importCommonPresenter);
@@ -141,17 +141,17 @@ public class MVPCreateAction extends AnAction {
         PsiClass contract;
         PsiClass faragment;
         PsiClass presenter;
-        if (hasEntity) {
+        //if (hasEntity) {
           contract = directoryService.createClass(pDirectory, className, "FragmentContract");
           faragment = directoryService.createClass(pDirectory, className, "Fragment");
           presenter = directoryService.createClass(pDirectory, className, "FragmentPresenter");
-        } else {
-          contract =
-              directoryService.createClass(pDirectory, className, "FragmentContractNoEntity");
-          faragment = directoryService.createClass(pDirectory, className, "FragmentNoEntity");
-          presenter =
-              directoryService.createClass(pDirectory, className, "FragmentPresenterNoEntity");
-        }
+        //} else {
+        //  contract =
+        //      directoryService.createClass(pDirectory, className, "FragmentContractNoEntity");
+        //  faragment = directoryService.createClass(pDirectory, className, "FragmentNoEntity");
+        //  presenter =
+        //      directoryService.createClass(pDirectory, className, "FragmentPresenterNoEntity");
+        //}
         ((PsiJavaFile) contract.getContainingFile()).getImportList()
                                                     .add(getPsiImportStatement("BaseMVPFragment"));
         ((PsiJavaFile) contract.getContainingFile()).getImportList().add(importCommonPresenter);

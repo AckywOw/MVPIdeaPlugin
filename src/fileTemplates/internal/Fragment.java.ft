@@ -7,12 +7,11 @@ package ${PACKAGE_NAME};
  * Author: ${USER}
  * Created on ${DATE}
  */
-public class ${NAME}Fragment
-    extends ${NAME}Contract.View<${NAME}Contract.Presenter<Entity>, Entity> {
+public class ${NAME}Fragment extends ${NAME}Contract.View<${NAME}Presenter> {
 
   @NonNull
   @Override
-  protected ${NAME}Contract.Presenter<Entity> getPresenter() {
+  protected ${NAME}Presenter getPresenter() {
     return new ${NAME}Presenter();
   }
 }

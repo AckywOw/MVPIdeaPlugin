@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>com.yinhu.app.plugin.mvp_create</id>
   <name>MVPClasses</name>
-  <version>1.3</version>
+  <version>1.3.2</version>
   <vendor email="" url="http://www.yinhu.com">YinHu.Jiang</vendor>
 
   <description><![CDATA[
@@ -10,7 +10,14 @@
       1 package and 3 files will be created: <br>
       1、Contract <br>
       2、Presenter <br>
-      3、Activity or Fragment
+      3、Activity or Fragment<br><br>
+      <em>Note:</em> <br>
+      Your Module should have 2 parent classes for the views to extends and 1 parent classes for
+      the presenters to extends, named:
+      BaseMVPActivity<br>
+      BaseMVPFragment<br>
+      CommonPresenter<br>
+
     ]]>
   </description>
 

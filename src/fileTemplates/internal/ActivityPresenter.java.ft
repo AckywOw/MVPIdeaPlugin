@@ -7,6 +7,6 @@ package ${PACKAGE_NAME};
  * Author: ${USER}
  * Created on ${DATE}
  */
-public class ${NAME}Presenter extends ${NAME}Contract.Presenter<Entity> {
+public class ${NAME}Presenter extends ${NAME}Contract.Presenter<${NAME}Activity> {
 
 }
